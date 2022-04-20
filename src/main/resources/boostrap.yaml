@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: url-shortener
+  liquibase: true
+
+---
+spring:
+  profiles: local
