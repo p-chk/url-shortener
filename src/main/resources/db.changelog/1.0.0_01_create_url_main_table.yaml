@@ -1,0 +1,41 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  1
+       author:  chayakorn.k
+       changes:
+         - createTable:
+             tableName: url_main
+             columns:
+               - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: full_url
+                   type: text
+               - column:
+                   name: short_url
+                   type: varchar(50)
+               - column:
+                   name: created_at
+                   type: datetime
+                   constraints:
+                     nullable: false
+               - column:
+                   name: created_by
+                   type: varchar(10)
+                   constraints:
+                     nullable: false
+              - column:
+                   name: last_modified_at
+                   type: varchar(10)
+                   constraints:
+                     nullable: false
+              - column:
+                   name: last_modified_by
+                   type: datetime
+                   constraints:
+                     nullable: false
