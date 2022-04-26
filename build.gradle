@@ -31,7 +31,7 @@ dependencies {
 
 	//Database
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'org.yaml.snakeyaml'
+	implementation 'org.yaml:snakeyaml'
 }
 
 tasks.named('test') {
