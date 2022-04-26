@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,9 +43,14 @@ public class UrlControllerTest {
         assertThat(result).isNull();
     }
 
-    void addUrl_should_callProcessFullUrlAndReturnShortenedUrl() {
+    @Test
+    void addUrl_should_callProcessFullUrlAndReturnShortenedUrl_whenProcessFullUrlSuccessfully() {
         doReturn("shortenedUrl").when(urlProcessingService).processFullUrl("fullUrl");
 
-        urlController.addUrl("fullUrl");
+        ResponseEntity result = urlController.addUrl("fullUrl");
+
+        verify(urlProcessingService).processFullUrl("fullUrl");
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(result.getBody()).hasFieldOrPropertyWithValue("shortenedUrl", "fullUrl");
     }
 }
