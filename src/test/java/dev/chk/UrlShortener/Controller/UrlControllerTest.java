@@ -51,6 +51,6 @@ public class UrlControllerTest {
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(result.getBody()).hasFieldOrPropertyWithValue("shortenedUrl", "fullUrl");
+        assertThat(result.getBody()).hasFieldOrPropertyWithValue("shortenedUrl", "shortenedUrl");
     }
 }
