@@ -40,4 +40,10 @@ public class UrlControllerTest {
         verify(urlProcessingService).getFullUrl("shortenUrl");
         assertThat(result).isNull();
     }
+
+    void addUrl_should_callProcessFullUrlAndReturnShortenedUrl() {
+        doReturn("shortenedUrl").when(urlProcessingService).processFullUrl("fullUrl");
+
+        urlController.addUrl("fullUrl");
+    }
 }
