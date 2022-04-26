@@ -34,12 +34,17 @@ public class UrlController {
     @PostMapping(path = "/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> addUrl(@RequestBody String fullUrl) {
-        String shortenedUrl = urlProcessingService.processFullUrl(fullUrl);
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("shortenedUrl", shortenedUrl);
-        ResponseEntity<HashMap<String, Object>> response = ResponseEntity.ok().body(body);
+    public ResponseEntity addUrl(@RequestBody String fullUrl) {
+        try {
+            String shortenedUrl = urlProcessingService.processFullUrl(fullUrl);
+            HashMap<String, Object> body = new HashMap<>();
+            body.put("shortenedUrl", shortenedUrl);
+            ResponseEntity<HashMap<String, Object>> response = ResponseEntity.ok().body(body);
+            return response;
+        } catch (Exception ex) {
+            log.debug("Failed due to {}", ex.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
 
-        return response;
     }
 }
