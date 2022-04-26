@@ -55,4 +55,14 @@ public class UrlControllerTest {
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(result.getBody()).hasFieldOrPropertyWithValue("shortenedUrl", "shortenedUrl");
     }
+
+    @Test
+    void addUrl_should_returnHttpStatus500_whenThereAreErrors() {
+        doThrow(NullPointerException.class).when(urlProcessingService).processFullUrl("fullUrl");
+
+        ResponseEntity<HashMap<String, Object>> result = urlController.addUrl("fullUrl");
+
+        verify(urlProcessingService).processFullUrl("fullUrl");
+        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
