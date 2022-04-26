@@ -31,6 +31,7 @@ public class UrlController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addUrl(@RequestBody String fullUrl) {
+        urlProcessingService.processFullUrl(fullUrl);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
