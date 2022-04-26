@@ -10,8 +10,8 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
     }
 
     @Override
-    public void processFullUrl() {
-
+    public String processFullUrl(String fullUrl) {
+        return null;
     }
 
     @Override
