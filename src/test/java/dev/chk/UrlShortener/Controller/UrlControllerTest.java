@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -47,7 +49,7 @@ public class UrlControllerTest {
     void addUrl_should_callProcessFullUrlAndReturnShortenedUrl_whenProcessFullUrlSuccessfully() {
         doReturn("shortenedUrl").when(urlProcessingService).processFullUrl("fullUrl");
 
-        ResponseEntity result = urlController.addUrl("fullUrl");
+        ResponseEntity<HashMap<String, Object>> result = urlController.addUrl("fullUrl");
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
