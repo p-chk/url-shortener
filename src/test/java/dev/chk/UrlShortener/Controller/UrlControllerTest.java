@@ -49,7 +49,7 @@ public class UrlControllerTest {
     void addUrl_should_callProcessFullUrlAndReturnShortenedUrl_whenProcessFullUrlSuccessfully() {
         doReturn("shortenedUrl").when(urlProcessingService).processFullUrl("fullUrl");
 
-        ResponseEntity<HashMap<String, Object>> result = urlController.addUrl("fullUrl");
+        ResponseEntity result = urlController.addUrl("fullUrl");
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -60,7 +60,7 @@ public class UrlControllerTest {
     void addUrl_should_returnHttpStatus500_whenThereAreErrors() {
         doThrow(NullPointerException.class).when(urlProcessingService).processFullUrl("fullUrl");
 
-        ResponseEntity<HashMap<String, Object>> result = urlController.addUrl("fullUrl");
+        ResponseEntity result = urlController.addUrl("fullUrl");
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
