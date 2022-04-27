@@ -39,8 +39,7 @@ public class UrlController {
             String shortenedUrl = urlProcessingService.processFullUrl(fullUrl);
             HashMap<String, Object> body = new HashMap<>();
             body.put("shortenedUrl", shortenedUrl);
-            ResponseEntity<HashMap<String, Object>> response = ResponseEntity.ok().body(body);
-            return response;
+            return ResponseEntity.ok().body(body);
         } catch (Exception ex) {
             log.debug("Failed due to {}", ex.getMessage());
             return ResponseEntity.internalServerError().build();
