@@ -1,12 +1,15 @@
 package dev.chk.UrlShortener.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UrlProcessingServiceImpl implements UrlProcessingService {
+    private final UrlMainService urlMainService;
     @Override
     public String getShortenedUrl() {
-        return null;
+        return String.valueOf(urlMainService.countRows() + 1);
     }
 
     @Override
