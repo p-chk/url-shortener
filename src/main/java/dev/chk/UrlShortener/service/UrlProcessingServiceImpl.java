@@ -1,5 +1,6 @@
 package dev.chk.UrlShortener.service;
 
+import dev.chk.UrlShortener.model.UrlMainEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,9 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
 
     @Override
     public String processFullUrl(String fullUrl) {
-        return null;
+        String shortenedUrl = getShortenedUrl();
+        saveUrl(UrlMainEntity.builder().fullUrl(fullUrl).shortUrl(shortenedUrl).build());
+        return shortenedUrl;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
         return null;
     }
 
-    private void saveUrl() {
-
+    private void saveUrl(UrlMainEntity urlMainEntity) {
+        urlMainService.save(urlMainEntity);
     }
 }

@@ -11,8 +11,8 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UrlProcessingServiceImplTest {
@@ -37,6 +37,17 @@ public class UrlProcessingServiceImplTest {
     }
 
     @Test
+    void getShortenedUrl_should_throwException_whenUrlMainServiceThrowException() {
+        doThrow(NullPointerException.class).when(urlMainService).countRows();
+
+        assertThrows(NullPointerException.class, () -> {
+            urlProcessingService.getShortenedUrl();
+        });
+
+        verify(urlMainService).countRows();
+    }
+
+    @Test
     void processFullUrl_should_callGetShortenedUrlAndSaveUrlToUrlMainAndReturnShortenedUrl_whenFullUrlIsGiven() {
         doReturn("1").when(urlProcessingService).getShortenedUrl();
         String expect = "1";
@@ -45,5 +56,18 @@ public class UrlProcessingServiceImplTest {
         verify(urlProcessingService).getShortenedUrl();
         verify(urlMainService).save(UrlMainEntity.builder().fullUrl("fullUrl").shortUrl("1").build());
         assertThat(actual).isEqualTo(expect);
+    }
+
+    @Test
+    void processFullUrl_should_throwException_whenSaveUrlThrowsExcpetion() {
+        doThrow(NullPointerException.class).when(urlMainService).save(UrlMainEntity.builder().fullUrl("fullUrl").shortUrl("1").build());
+        String expect = "1";
+        assertThrows(NullPointerException.class, () -> {
+            String actual = urlProcessingService.processFullUrl("fullUrl");
+
+            verify(urlProcessingService).getShortenedUrl();
+            assertThat(actual).isEqualTo(expect);
+            verify(urlMainService).save(UrlMainEntity.builder().fullUrl("fullUrl").shortUrl("1").build());
+        });
     }
 }
