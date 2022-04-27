@@ -24,7 +24,7 @@ public class UrlProcessingServiceImplTest {
 
     @Test
     void getShortenedUrl_should_returnShortenUrl() {
-        doReturn(0).when(urlMainService.countRows());
+        doReturn(0).when(urlMainService).countRows();
         String expect = "1";
         String actual = urlProcessingService.getShortenedUrl();
 
