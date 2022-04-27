@@ -19,7 +19,7 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
         return null;
     }
 
-    private String shortenUrl(String fullUrl) {
-        return null;
+    private void saveUrl() {
+
     }
 }
