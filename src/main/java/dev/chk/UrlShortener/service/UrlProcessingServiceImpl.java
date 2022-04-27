@@ -18,4 +18,8 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
     public String getFullUrl(String shortenedUrl) {
         return null;
     }
+
+    private String shortenUrl(String fullUrl) {
+        return null;
+    }
 }
