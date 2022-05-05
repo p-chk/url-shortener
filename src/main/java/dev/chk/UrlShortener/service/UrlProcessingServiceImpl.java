@@ -1,5 +1,6 @@
 package dev.chk.UrlShortener.service;
 
+import dev.chk.UrlShortener.dto.UrlAddDto;
 import dev.chk.UrlShortener.exception.UrlNotFoundException;
 import dev.chk.UrlShortener.model.UrlMainEntity;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
         saveUrl(UrlMainEntity.builder().fullUrl(fullUrl).shortUrl(shortenedUrl).build());
         return shortenedUrl;
     }
+
 
     @Override
     public String getFullUrl(String shortenedUrl) {

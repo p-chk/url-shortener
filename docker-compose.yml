@@ -15,6 +15,7 @@ services:
       SPRING_DATASOURCE_USERNAME: local
       SPRING_DATASOURCE_PASSWORD: local
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: local
 
   db:
     image: 'postgres:13.1-alpine'

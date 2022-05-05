@@ -14,6 +14,9 @@ spring:
 spring:
   profiles: local
   datasource:
-    url: jdbc:postgresql://localhost:5432/url
+    url: jdbc:postgresql://localhost:5432/url-db
     username: local
-    password:
+    password: local
+logging:
+  level:
+    root: info

@@ -35,8 +35,7 @@ dependencies {
 	implementation 'org.yaml:snakeyaml'
 	implementation 'org.hibernate:hibernate-core'
 	implementation 'org.hibernate:hibernate-entitymanager'
-
-
+	implementation 'org.postgresql:postgresql:42.3.5'
 }
 
 tasks.named('test') {

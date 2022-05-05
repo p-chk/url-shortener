@@ -1,6 +1,7 @@
 package dev.chk.UrlShortener.Controller;
 
 import dev.chk.UrlShortener.controller.UrlController;
+import dev.chk.UrlShortener.dto.UrlAddDto;
 import dev.chk.UrlShortener.service.UrlProcessingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,9 +48,10 @@ public class UrlControllerTest {
 
     @Test
     void addUrl_should_callProcessFullUrlAndReturnShortenedUrl_whenProcessFullUrlSuccessfully() {
+        UrlAddDto request = UrlAddDto.builder().fullUrl("fullUrl").build();
         doReturn("shortenedUrl").when(urlProcessingService).processFullUrl("fullUrl");
 
-        ResponseEntity result = urlController.addUrl("fullUrl");
+        ResponseEntity result = urlController.addUrl(request);
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -58,9 +60,10 @@ public class UrlControllerTest {
 
     @Test
     void addUrl_should_returnHttpStatus500_whenThereAreErrors() {
+        UrlAddDto request = UrlAddDto.builder().fullUrl("fullUrl").build();
         doThrow(NullPointerException.class).when(urlProcessingService).processFullUrl("fullUrl");
 
-        ResponseEntity result = urlController.addUrl("fullUrl");
+        ResponseEntity result = urlController.addUrl(request);
 
         verify(urlProcessingService).processFullUrl("fullUrl");
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
