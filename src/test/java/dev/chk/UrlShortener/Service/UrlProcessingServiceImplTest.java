@@ -86,7 +86,6 @@ public class UrlProcessingServiceImplTest {
     @Test
     void getFullUrl_should_throwError_whenCannotFindFullUrl() {
         doReturn(null).when(urlMainService).findByShortenedUrl("shortUrl");
-        String expected = "fullUrl";
 
         assertThrows(UrlNotFoundException.class, () -> {
             urlProcessingService.getFullUrl("shortUrl");
