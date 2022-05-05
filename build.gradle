@@ -27,12 +27,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//Database
-	implementation 'org.springframework.data:spring-data-jpa'
 	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.yaml:snakeyaml'
+	implementation 'org.hibernate:hibernate-core'
+	implementation 'org.hibernate:hibernate-entitymanager'
+
+
 }
 
 tasks.named('test') {
