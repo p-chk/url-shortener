@@ -1,6 +1,8 @@
 package dev.chk.UrlShortener.service;
 
+import dev.chk.UrlShortener.exception.UrlNotFoundException;
 import dev.chk.UrlShortener.model.UrlMainEntity;
+import liquibase.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,11 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
 
     @Override
     public String getFullUrl(String shortenedUrl) {
-        return urlMainService.findByShortenedUrl(shortenedUrl).getFullUrl();
+        UrlMainEntity urlMainEntity = urlMainService.findByShortenedUrl(shortenedUrl);
+        if (urlMainEntity != null) {
+            return urlMainService.findByShortenedUrl(shortenedUrl).getFullUrl();
+        }
+        throw new UrlNotFoundException(String.format("Cannot find full Url with %s", shortenedUrl));
     }
 
     private void saveUrl(UrlMainEntity urlMainEntity) {
