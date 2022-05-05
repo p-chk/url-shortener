@@ -25,7 +25,7 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
     public String getFullUrl(String shortenedUrl) {
         UrlMainEntity urlMainEntity = urlMainService.findByShortenedUrl(shortenedUrl);
         if (urlMainEntity != null) {
-            return urlMainService.findByShortenedUrl(shortenedUrl).getFullUrl();
+            return urlMainEntity.getFullUrl();
         }
         throw new UrlNotFoundException(String.format("Cannot find full Url with %s", shortenedUrl));
     }
