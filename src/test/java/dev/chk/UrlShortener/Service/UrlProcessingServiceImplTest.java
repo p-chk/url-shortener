@@ -1,5 +1,6 @@
 package dev.chk.UrlShortener.Service;
 
+import dev.chk.UrlShortener.exception.UrlNotFoundException;
 import dev.chk.UrlShortener.model.UrlMainEntity;
 import dev.chk.UrlShortener.service.UrlMainService;
 import dev.chk.UrlShortener.service.UrlProcessingServiceImpl;
@@ -9,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -77,6 +80,18 @@ public class UrlProcessingServiceImplTest {
         String actual = urlProcessingService.getFullUrl("shortUrl");
 
         assertThat(actual).isEqualTo(expected);
+        verify(urlMainService).findByShortenedUrl("shortUrl");
+    }
+
+    @Test
+    void getFullUrl_should_throwError_whenCannotFindFullUrl() {
+        doReturn(null).when(urlMainService).findByShortenedUrl("shortUrl");
+        String expected = "fullUrl";
+
+        assertThrows(UrlNotFoundException.class, () -> {
+            urlProcessingService.getFullUrl("shortUrl");
+        });
+
         verify(urlMainService).findByShortenedUrl("shortUrl");
     }
 }
