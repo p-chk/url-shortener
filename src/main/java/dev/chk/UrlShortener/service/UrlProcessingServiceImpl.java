@@ -22,7 +22,7 @@ public class UrlProcessingServiceImpl implements UrlProcessingService {
 
     @Override
     public String getFullUrl(String shortenedUrl) {
-        return null;
+        return urlMainService.findByShortenedUrl(shortenedUrl).getFullUrl();
     }
 
     private void saveUrl(UrlMainEntity urlMainEntity) {

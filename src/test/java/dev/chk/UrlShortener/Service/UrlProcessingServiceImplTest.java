@@ -20,7 +20,6 @@ public class UrlProcessingServiceImplTest {
     @InjectMocks
     UrlProcessingServiceImpl urlProcessingService;
 
-
     @Mock
     UrlMainService urlMainService;
 
