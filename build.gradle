@@ -30,6 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//Database
+	implementation 'org.springframework.data:spring-data-jpa'
 	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.yaml:snakeyaml'
 }
