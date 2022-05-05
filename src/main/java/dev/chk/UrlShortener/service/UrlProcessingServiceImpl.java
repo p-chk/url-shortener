@@ -2,7 +2,6 @@ package dev.chk.UrlShortener.service;
 
 import dev.chk.UrlShortener.exception.UrlNotFoundException;
 import dev.chk.UrlShortener.model.UrlMainEntity;
-import liquibase.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
