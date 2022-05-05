@@ -70,4 +70,14 @@ public class UrlProcessingServiceImplTest {
             verify(urlMainService).save(UrlMainEntity.builder().fullUrl("fullUrl").shortUrl("1").build());
         });
     }
+    @Test
+    void getFullUrl_should_callFindFullUrlByShortUrlAndReturn() {
+        doReturn(UrlMainEntity.builder().fullUrl("fullUrl").build()).when(urlMainService).findByShortenedUrl("shortUrl");
+        String expected = "fullUrl";
+
+        String actual = urlProcessingService.getFullUrl("shortUrl");
+
+        assertThat(actual).isEqualTo(expected);
+        verify(urlMainService).findByShortenedUrl("shortUrl");
+    }
 }
