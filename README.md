@@ -46,6 +46,10 @@ Last Updated: 2022-05-07
 - Springboot 2.6.6
 - Gradle 7.4.1
 ```
+**Database:**
+```
+- Postgres 13.1 alpine
+```
 
 
 ## Current Business Logic
